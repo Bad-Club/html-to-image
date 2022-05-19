@@ -35,7 +35,7 @@ describe('html to image', () => {
     it('should render to blob', (done) => {
       Helper.bootstrap('small/node.html', 'small/style.css', 'small/image')
         .then(htmlToImage.toBlob)
-        .then(global.URL.createObjectURL)
+        .then(async (x: Blob) => global.URL.createObjectURL(x))
         .then(Helper.check)
         .then(done)
         .catch(done)
