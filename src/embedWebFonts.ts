@@ -74,10 +74,7 @@ function parseCSS(source: string) {
   // strip out comments
   let cssText = source.replace(commentsRegex, '')
 
-  const keyframesRegex = new RegExp(
-    '((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})',
-    'gi',
-  )
+  const keyframesRegex = /((@.*?keyframes [\s\S]*?){([\s\S]*?}\s*?)})/gi
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const matches = keyframesRegex.exec(cssText)

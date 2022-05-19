@@ -88,7 +88,9 @@ export const uuid = (function uuid() {
 export const delay =
   <T>(ms: number) =>
   (args: T) =>
-    new Promise<T>((resolve) => setTimeout(() => resolve(args), ms))
+    new Promise<T>((resolve) => {
+      setTimeout(() => resolve(args), ms)
+    })
 
 export function toArray<T>(arrayLike: any): T[] {
   const arr: T[] = []
@@ -145,13 +147,13 @@ export function canvasToBlob(
   options: Options = {},
 ): Promise<Blob | null> {
   if (canvas.toBlob) {
-    return new Promise((resolve) =>
+    return new Promise((resolve) => {
       canvas.toBlob(
         resolve,
         options.type ? options.type : 'image/png',
         options.quality ? options.quality : 1,
-      ),
-    )
+      )
+    })
   }
 
   return new Promise((resolve) => {
