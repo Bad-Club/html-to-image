@@ -1,5 +1,5 @@
 {
-  "name": "html-to-image",
+  "name": "@rigocorp/html-to-image",
   "version": "1.9.0",
   "description": "Generates an image from a DOM node using HTML5 canvas and SVG.",
   "main": "lib/index.js",
@@ -65,6 +65,10 @@
     {
       "name": "OiNutter",
       "email": "will@oinutter.co.uk"
+    },
+    {
+      "name": "Marcos Del Sol Vives",
+      "email": "marcos@orca.pet"
     }
   ],
   "devDependencies": {
@@ -109,10 +113,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bubkoo/html-to-image.git"
+    "url": "git+https://github.com/RigoCorp/html-to-image.git"
   },
   "bugs": {
-    "url": "https://github.com/bubkoo/html-to-image/issues"
+    "url": "https://github.com/RigoCorp/html-to-image/issues"
   },
-  "homepage": "https://github.com/bubkoo/html-to-image#readme"
+  "homepage": "https://github.com/RigoCorp/html-to-image#readme"
 }
