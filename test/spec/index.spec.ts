@@ -217,19 +217,24 @@ describe('html to image', () => {
         .catch(done)
     })
 
-    fit('should render content from <canvas>', (done) => {
-      Helper.bootstrap('canvas/node.html')
+    it('should render content from <canvas>', (done) => {
+      Helper.bootstrap('canvas/node.html', 'canvas/style.css', 'canvas/image')
         .then((container: HTMLDivElement) => {
+          // We'll draw the flag of Ukraine, which is pretty simple
           const canvas = document.getElementById('content') as HTMLCanvasElement
           const ctx = canvas.getContext('2d')!
-          ctx.fillStyle = '#ffffff'
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
-          ctx.fillStyle = '#000000'
-          ctx.font = '100px monospace'
-          ctx.fillText('ABC', 10, canvas.height - 10)
+
+          // Blue top
+          ctx.fillStyle = '#0057b7'
+          ctx.fillRect(0, 0, canvas.width, canvas.height / 2)
+
+          // Yellow bottom
+          ctx.fillStyle = '#ffd700'
+          ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2)
+
           return container
         })
-        .then(Helper.assertTextRendered(['ABC']))
+        .then(Helper.renderAndCheck)
         .then(done)
         .catch(done)
     })
