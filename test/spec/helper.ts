@@ -172,7 +172,7 @@ export namespace Helper {
 
 export namespace Helper {
   export function assertTextRendered(lines: string[]) {
-    return (node: HTMLDivElement = getCaptureNode()) =>
+    return (node: HTMLDivElement) =>
       renderToPng(node)
         .then(drawDataUrl)
         .then(() =>

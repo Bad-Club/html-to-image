@@ -217,18 +217,19 @@ describe('html to image', () => {
         .catch(done)
     })
 
-    it('should render content from <canvas>', (done) => {
-      Helper.bootstrap('canvas/node.html', 'canvas/style.css')
-        .then(() => {
+    fit('should render content from <canvas>', (done) => {
+      Helper.bootstrap('canvas/node.html')
+        .then((container: HTMLDivElement) => {
           const canvas = document.getElementById('content') as HTMLCanvasElement
           const ctx = canvas.getContext('2d')!
           ctx.fillStyle = '#ffffff'
           ctx.fillRect(0, 0, canvas.width, canvas.height)
           ctx.fillStyle = '#000000'
           ctx.font = '100px monospace'
-          ctx.fillText('0', canvas.width / 2, canvas.height / 2)
+          ctx.fillText('ABC', 10, canvas.height - 10)
+          return container
         })
-        .then(() => Helper.assertTextRendered(['0']))
+        .then(Helper.assertTextRendered(['ABC']))
         .then(done)
         .catch(done)
     })
