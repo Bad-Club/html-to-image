@@ -501,6 +501,9 @@ describe('html to image', () => {
       Helper.bootstrap('ext-css/node.html', 'ext-css/style.css')
         .then(util.delay(1000))
         .then(Helper.renderToPng)
+        .then((imageData: string) => {
+          expect(imageData).toMatch(/^data:/)
+        })
         .then(done)
         .catch(done)
     })
