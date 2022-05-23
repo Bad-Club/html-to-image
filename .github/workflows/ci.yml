@@ -27,11 +27,6 @@ jobs:
         run: yarn build
       - name: ✅　Test
         run: yarn test
-      - name: 💡　Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./test/coverage/lcov.info
       - name: 💡　Codecov
         uses: codecov/codecov-action@v2
         with:
