@@ -332,7 +332,3 @@ This library uses a feature of SVG that allows having arbitrary HTML content ins
 Please let us know how can we help. Do check out [issues](https://github.com/bubkoo/html-to-image/issues) for bug reports or suggestions first.
 
 To become a contributor, please follow our [contributing guide](/CONTRIBUTING.md).
-
-<a href="https://github.com/bubkoo/html-to-image/graphs/contributors">
-  <img src="/CONTRIBUTORS.svg" alt="Contributors" width="740" />
-</a>

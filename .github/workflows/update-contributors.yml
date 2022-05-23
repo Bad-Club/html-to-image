@@ -2,21 +2,17 @@ name: 🤝　Update Contributors
 on:
   schedule:
     - cron: '0 1 * * *'
+  workflow_dispatch: true
   push:
     branches:
       - master
-      - alpha
-      - beta
 jobs:
   contributors:
     runs-on: ubuntu-latest
     steps:
-      - uses: bubkoo/use-app-token@v1
+      - uses: actions/checkout@v2
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
-          env_name: bot_token
-      - uses: bubkoo/contributors-list@v1
+          fetch-depth: 0
+      - uses: wow-actions/update-contributors@v1
         with:
-          GITHUB_TOKEN: ${{ env.bot_token }}
-          excludeUsers: semantic-release-bot ImgBotApp
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
