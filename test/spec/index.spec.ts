@@ -193,11 +193,12 @@ describe('html to image', () => {
     it('should render user input from <input>', (done) => {
       const text = 'USER INPUT'
       Helper.bootstrap('input/node.html', 'input/style.css')
-        .then(() => {
+        .then((container: HTMLDivElement) => {
           const input = document.getElementById('input') as HTMLInputElement
           input.value = text
+          return container
         })
-        .then(() => Helper.assertTextRendered([text]))
+        .then(Helper.assertTextRendered([text]))
         .then(done)
         .catch(done)
     })
@@ -206,11 +207,12 @@ describe('html to image', () => {
       const text = 'USER\nINPUT'
 
       Helper.bootstrap('textarea/node.html', 'textarea/style.css')
-        .then(() => {
+        .then((container: HTMLDivElement) => {
           const input = document.getElementById('input') as HTMLInputElement
           input.value = text
+          return container
         })
-        .then(() => Helper.assertTextRendered([text]))
+        .then(Helper.assertTextRendered(text.split('\n')))
         .then(done)
         .catch(done)
     })
