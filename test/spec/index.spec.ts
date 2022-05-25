@@ -145,6 +145,13 @@ describe('html to image', () => {
         .catch(done)
     })
 
+    it('should render text nodes with ellipsis', (done) => {
+      Helper.bootstrap('ellipsis/node.html', 'ellipsis/style.css')
+        .then(Helper.assertTextRendered(['LOOO', 'OOO...']))
+        .then(done)
+        .catch(done)
+    })
+
     it('should preserve content of ::before and ::after pseudo elements', (done) => {
       Helper.bootstrap('pseudo/node.html', 'pseudo/style.css')
         .then(

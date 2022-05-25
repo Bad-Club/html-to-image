@@ -1,0 +1,10 @@
+#dom-node {
+  padding: 5px;
+  width: 200px;
+  height: 60px;
+  font-family: monospace;
+  font-size: 24px;
+  background-color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
