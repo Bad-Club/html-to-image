@@ -152,6 +152,34 @@ describe('html to image', () => {
         .catch(done)
     })
 
+    fit('should render text nodes with precise width', (done) => {
+      /*
+       * If a node containing text has the precise width of said text, under some circumstances,
+       * the last word of a line might get nudged to the next one.
+       *
+       * This seems to be caused by minuscule rounding errors in the width reported by the
+       * getComputedStyle function, causing a disparity between the HTML and the captured PNG
+       * image.
+       *
+       * Due to the nature of the cause, it's pretty hard to reproduce. On my machine, this issue
+       * manifests itself on Edge v101, but only with some fonts and texts. Firefox v100, on the
+       * other hand, doesn't seem to be affected at all.
+       *
+       * Some places where these nodes with precise width may appear include:
+       *  - In nodes with CSS display set to inline-block.
+       *  - In flex layouts.
+       * In these cases, the node's width matches precisely that of text inside, leaving no room
+       * for error.
+       *
+       * In this test, we'll render a HTML that triggers this condition in my machine, and ensure
+       * everything is visible and in the same line.
+       */
+      Helper.bootstrap('precise-width/node.html', 'precise-width/style.css')
+        .then(Helper.assertTextRendered(['Ice Age']))
+        .then(done)
+        .catch(done)
+    })
+
     it('should preserve content of ::before and ::after pseudo elements', (done) => {
       Helper.bootstrap('pseudo/node.html', 'pseudo/style.css')
         .then(

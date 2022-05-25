@@ -178,7 +178,9 @@ export namespace Helper {
         .then(() =>
           recognize(getCanvasNode().toDataURL()).then((text: string) => {
             // console.log(text)
-            expect(lines.every((line) => text.includes(line))).toBe(true)
+            for (const line of lines) {
+              expect(text).toContain(line)
+            }
           }),
         )
   }

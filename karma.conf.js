@@ -13,17 +13,18 @@ module.exports = function (config) {
       {
         pattern: 'test/spec/resources/**/*',
         included: false,
-        served: true,
       },
       {
         pattern: 'node_modules/@fortawesome/fontawesome-free/css/*.*',
         included: false,
-        served: true,
       },
       {
         pattern: 'node_modules/@fortawesome/fontawesome-free/webfonts/*.*',
         included: false,
-        served: true,
+      },
+      {
+        pattern: 'node_modules/@fontsource/roboto/*.*',
+        included: false,
       },
       'node_modules/imagediff/imagediff.js',
       'src/**/*.ts',

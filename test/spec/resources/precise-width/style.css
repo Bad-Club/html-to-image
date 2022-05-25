@@ -1,0 +1,10 @@
+#dom-node {
+  padding: 5px;
+  width: 200px;
+  background-color: white;
+  font-family: 'Roboto Serif';
+  font-size: 32px;
+}
+.inline {
+  display: inline-block;
+}
