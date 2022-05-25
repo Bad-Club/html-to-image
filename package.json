@@ -78,7 +78,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
-    "git-generate-authors": "^1.1.0",
+    "git-generate-authors": "^1.2.0",
     "husky": "^8.0.1",
     "imagediff": "^1.0.8",
     "is-ci": "^3.0.1",
