@@ -1480,6 +1480,11 @@ commander@^8.3.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
+commander@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-9.2.0.tgz#6e21014b2ed90d8b7c9647230d8b7a94a4a419a9"
+  integrity sha512-e2i4wANQiSXgnrBlIatyHtP1odfUp0BbV5Y5nEGbxtIrStkEOAAzCUirvLBNXHLr7kwLvJl6V+4V3XV9x7Wd9w==
+
 commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -2571,6 +2576,13 @@ getpass@^0.1.1:
   integrity sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=
   dependencies:
     assert-plus "^1.0.0"
+
+git-generate-authors@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/git-generate-authors/-/git-generate-authors-1.1.0.tgz#d3f3078133ed099a4bd5a6c0b4b14847f49f2fff"
+  integrity sha512-T4Yb46E0tFISPr9b9Lx22RjMTLfb86rl7qQJi8utqoiyw8j6a+8BM1xlahhES8WRv+kzKVDksH8rkGUcKfiYGQ==
+  dependencies:
+    commander "^9.2.0"
 
 git-raw-commits@^2.0.0:
   version "2.0.11"

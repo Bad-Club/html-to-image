@@ -7,6 +7,7 @@
   "unpkg": "dist/html-to-image.js",
   "types": "lib/index.d.ts",
   "files": [
+    "AUTHORS",
     "dist",
     "es",
     "lib"
@@ -24,10 +25,11 @@
   "scripts": {
     "lint": "eslint 'src/**/*.{js,ts}?(x)' --fix",
     "clean": "rimraf dist es lib",
+    "build:authors": "git-generate-authors",
     "build:esm": "tsc --module esnext --target es2015 --outDir ./es",
     "build:cjs": "tsc --module commonjs --target es5 --outDir ./lib",
     "build:umd": "rollup -c",
-    "build": "run-s build:esm build:cjs build:umd",
+    "build": "run-s build:authors build:esm build:cjs build:umd",
     "prebuild": "run-s lint clean",
     "test": "karma start",
     "test:watch": "karma start --single-run=false --auto-watch",
@@ -57,20 +59,6 @@
     "name": "bubkooo",
     "email": "bubkoo.wy@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "bubkooo",
-      "email": "bubkoo.wy@gmail.com"
-    },
-    {
-      "name": "OiNutter",
-      "email": "will@oinutter.co.uk"
-    },
-    {
-      "name": "Marcos Del Sol Vives",
-      "email": "marcos@orca.pet"
-    }
-  ],
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
@@ -90,6 +78,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "git-generate-authors": "^1.1.0",
     "husky": "^8.0.1",
     "imagediff": "^1.0.8",
     "is-ci": "^3.0.1",
