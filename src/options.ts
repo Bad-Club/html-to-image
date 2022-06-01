@@ -76,7 +76,13 @@ export interface Options {
    */
   skipAutoScale?: boolean
   /**
-   * A string indicating the image format. The default type is image/png; that type is also used if the given type isn't supported.
+   * A string indicating the image format. The default type is image/png; that
+   * type is also used if the given type isn't supported.
    */
   type?: string
+  /**
+   * If not set, all CSS "font-kerning" properties set to "auto" will have
+   * their value replaced with "normal".
+   */
+  allowAutoKerning?: boolean
 }

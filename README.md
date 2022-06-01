@@ -279,10 +279,25 @@ Defaults to `false`
 
 ### type
 
-A string indicating the image format. The default type is image/png; that type is also used if the given type isn't supported.
-When supplied, the toCanvas function will return a blob matching the given image type and quality. 
+A string indicating the image format. The default type is image/png; that type is also used if the
+given type isn't supported. When supplied, the toCanvas function will return a blob matching the
+given image type and quality. 
 
 Defaults to `image/png`  
+
+### allowAutoKerning
+
+When rendering HTML, all modern web browsers default to enabling kerning unless the `font-kerning`
+CSS property is set to `none`. When rendering SVG, however, Chromium-based browsers default to
+disabling kerning.
+
+This difference in behaviour when rendering HTML vs SVG cause differences in node sizing, and
+as a result in some cases, generated raster images might have broken layouts.
+
+In order to workaround this, all nodes whose `font-kerning` has the default value of `auto` will
+have their value replaced with `normal`.
+
+If you prefer to get the original CSS as-is, set this value to `true`.
 
 ## Browsers
 

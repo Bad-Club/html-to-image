@@ -91,6 +91,15 @@ function cloneCSSStyle<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
   }
 }
 
+function replaceFontKerning<T extends HTMLElement>(
+  clonedNode: T,
+  options: Options,
+) {
+  if (!options.allowAutoKerning && clonedNode.style.fontKerning === 'auto') {
+    clonedNode.style.fontKerning = 'normal'
+  }
+}
+
 function cloneInputValue<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
   if (nativeNode instanceof HTMLTextAreaElement) {
     clonedNode.innerHTML = nativeNode.value
@@ -104,6 +113,7 @@ function cloneInputValue<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
 async function decorate<T extends HTMLElement>(
   nativeNode: T,
   clonedNode: T,
+  options: Options,
 ): Promise<T> {
   if (!(clonedNode instanceof Element)) {
     return Promise.resolve(clonedNode)
@@ -111,6 +121,7 @@ async function decorate<T extends HTMLElement>(
 
   return Promise.resolve()
     .then(() => cloneCSSStyle(nativeNode, clonedNode))
+    .then(() => replaceFontKerning(clonedNode, options))
     .then(() => clonePseudoElements(nativeNode, clonedNode))
     .then(() => cloneInputValue(nativeNode, clonedNode))
     .then(() => clonedNode)
@@ -128,5 +139,5 @@ export async function cloneNode<T extends HTMLElement>(
   return Promise.resolve(node)
     .then((clonedNode) => cloneSingleNode(clonedNode, options) as Promise<T>)
     .then((clonedNode) => cloneChildren(node, clonedNode, options))
-    .then((clonedNode) => decorate(node, clonedNode))
+    .then((clonedNode) => decorate(node, clonedNode, options))
 }
