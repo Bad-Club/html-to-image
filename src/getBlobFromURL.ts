@@ -63,7 +63,7 @@ export function getBlobFromURL(
   }
 
   const deferred = window
-    .fetch(url, options.fetchRequestInit)
+    .fetch(url)
     .then((res) =>
       // eslint-disable-next-line promise/no-nesting
       res.blob().then((blob) => ({

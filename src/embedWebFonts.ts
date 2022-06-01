@@ -40,7 +40,7 @@ async function embedFonts(meta: Metadata, options: Options): Promise<string> {
 
       // eslint-disable-next-line promise/no-nesting
       return window
-        .fetch(url, options.fetchRequestInit)
+        .fetch(url)
         .then((res) => res.blob())
         .then(
           (blob) =>
