@@ -2,6 +2,7 @@ import { Options } from './options'
 import { getBlobFromURL } from './getBlobFromURL'
 import { clonePseudoElements } from './clonePseudoElements'
 import { createImage, getMimeType, makeDataUrl, toArray } from './util'
+import { applyCssFixes } from './cssFixes'
 
 async function cloneCanvasElement(node: HTMLCanvasElement) {
   const dataURL = node.toDataURL()
@@ -70,7 +71,11 @@ async function cloneChildren<T extends HTMLElement>(
     .then(() => clonedNode)
 }
 
-function cloneCSSStyle<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
+function cloneCSSStyle<T extends HTMLElement>(
+  nativeNode: T,
+  clonedNode: T,
+  options: Options,
+) {
   const source = window.getComputedStyle(nativeNode)
   const target = clonedNode.style
 
@@ -89,14 +94,9 @@ function cloneCSSStyle<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
       )
     })
   }
-}
 
-function replaceFontKerning<T extends HTMLElement>(
-  clonedNode: T,
-  options: Options,
-) {
-  if (!options.allowAutoKerning && clonedNode.style.fontKerning === 'auto') {
-    clonedNode.style.fontKerning = 'normal'
+  if (!options.skipCssFixes) {
+    applyCssFixes(nativeNode, clonedNode)
   }
 }
 
@@ -120,8 +120,7 @@ async function decorate<T extends HTMLElement>(
   }
 
   return Promise.resolve()
-    .then(() => cloneCSSStyle(nativeNode, clonedNode))
-    .then(() => replaceFontKerning(clonedNode, options))
+    .then(() => cloneCSSStyle(nativeNode, clonedNode, options))
     .then(() => clonePseudoElements(nativeNode, clonedNode))
     .then(() => cloneInputValue(nativeNode, clonedNode))
     .then(() => clonedNode)

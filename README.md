@@ -285,17 +285,10 @@ given image type and quality.
 
 Defaults to `image/png`  
 
-### allowAutoKerning
+### skipCssFixes
 
-When rendering HTML, all modern web browsers default to enabling kerning unless the `font-kerning`
-CSS property is set to `none`. When rendering SVG, however, Chromium-based browsers default to
-disabling kerning.
-
-This difference in behaviour when rendering HTML vs SVG cause differences in node sizing, and
-as a result in some cases, generated raster images might have broken layouts.
-
-In order to workaround this, all nodes whose `font-kerning` has the default value of `auto` will
-have their value replaced with `normal`.
+By default, some fixes will be applied automatically to calculated CSS properties, in order to
+improve the accuracy of the resulting SVG/raster images.
 
 If you prefer to get the original CSS as-is, set this value to `true`.
 

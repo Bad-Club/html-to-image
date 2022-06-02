@@ -81,8 +81,7 @@ export interface Options {
    */
   type?: string
   /**
-   * If not set, all CSS "font-kerning" properties set to "auto" will have
-   * their value replaced with "normal".
+   * If not true, CSS fixes to improve rendering accuracy will be applied.
    */
-  allowAutoKerning?: boolean
+  skipCssFixes?: boolean
 }
