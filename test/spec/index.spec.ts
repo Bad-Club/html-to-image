@@ -160,6 +160,7 @@ describe('html to image', () => {
        * without kerning is wider than the calculated width with kerning enabled.
        */
       Helper.bootstrap('kerning-test/node.html', 'kerning-test/style.css')
+        .then(util.delay(1000))
         .then(Helper.assertTextRendered(['Ice Age']))
         .then(done)
         .catch(done)
