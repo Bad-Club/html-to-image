@@ -34,13 +34,12 @@
     "test": "karma start",
     "test:watch": "karma start --single-run=false --auto-watch",
     "test:debug": "karma start --browsers=Chrome --single-run=false --auto-watch --debug",
-    "coveralls": "cat ./test/coverage/lcov.info | coveralls",
     "pretest": "rimraf ./test/coverage",
-    "prepare": "is-ci || husky install .husky"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "pretty-quick — staged"
+      "pretty-quick --staged"
     ],
     "*.ts": [
       "eslint --fix"
@@ -50,9 +49,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "release": {
-    "extends": "@bubkoo/semantic-release-config"
   },
   "license": "MIT",
   "author": {
@@ -71,7 +67,7 @@
     "@types/jquery": "^3.5.14",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
-    "coveralls": "^3.1.1",
+    "devmoji": "^2.3.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -82,7 +78,6 @@
     "git-generate-authors": "^1.2.0",
     "husky": "^8.0.1",
     "imagediff": "^1.0.8",
-    "is-ci": "^3.0.1",
     "jasmine-core": "^4.1.1",
     "karma": "^6.3.20",
     "karma-chrome-launcher": "^3.1.1",
