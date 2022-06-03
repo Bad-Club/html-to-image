@@ -4,10 +4,12 @@ import * as htmlToImage from '../../src'
 import * as embeding from '../../src/embedResources'
 import { Helper } from './helper'
 
+// 2 minute timeout for OCR tests, as time routinely exceeds the minute
+const OCR_TEST_TIMEOUT = 120 * 1000
+
 describe('html to image', () => {
   beforeAll(() => {
     process.env.devicePixelRatio = '1'
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
   })
 
   afterAll(() => {
@@ -138,47 +140,63 @@ describe('html to image', () => {
         .catch(done)
     })
 
-    it('should render text nodes', (done) => {
-      Helper.bootstrap('text/node.html', 'text/style.css')
-        .then(Helper.assertTextRendered(['SOME TEXT', 'SOME MORE TEXT']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render text nodes',
+      (done) => {
+        Helper.bootstrap('text/node.html', 'text/style.css')
+          .then(Helper.assertTextRendered(['SOME TEXT', 'SOME MORE TEXT']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render text nodes with ellipsis', (done) => {
-      Helper.bootstrap('ellipsis/node.html', 'ellipsis/style.css')
-        .then(Helper.assertTextRendered(['LOOO', 'OOO...']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render text nodes with ellipsis',
+      (done) => {
+        Helper.bootstrap('ellipsis/node.html', 'ellipsis/style.css')
+          .then(Helper.assertTextRendered(['LOOO', 'OOO...']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render text with kerning', (done) => {
-      /*
-       * This is a test for the automatic "font-kerning" replacement.
-       *
-       * If it failed, the last word of "Ice Age" will appear in the next line, as "Ice Age"
-       * without kerning is wider than the calculated width with kerning enabled.
-       */
-      Helper.bootstrap('kerning-test/node.html', 'kerning-test/style.css')
-        .then(util.delay(1000))
-        .then(Helper.assertTextRendered(['Ice Age']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render text with kerning',
+      (done) => {
+        /*
+         * This is a test for the automatic "font-kerning" replacement.
+         *
+         * If it failed, the last word of "Ice Age" will appear in the next line, as "Ice Age"
+         * without kerning is wider than the calculated width with kerning enabled.
+         */
+        Helper.bootstrap('kerning-test/node.html', 'kerning-test/style.css')
+          .then(util.delay(1000))
+          .then(Helper.assertTextRendered(['Ice Age']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should preserve content of ::before and ::after pseudo elements', (done) => {
-      Helper.bootstrap('pseudo/node.html', 'pseudo/style.css')
-        .then(
-          Helper.assertTextRendered([
-            'JUSTBEFORE',
-            'BOTHBEFORE',
-            'JUSTAFTER',
-            'BOTHAFTER',
-          ]),
-        )
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should preserve content of ::before and ::after pseudo elements',
+      (done) => {
+        Helper.bootstrap('pseudo/node.html', 'pseudo/style.css')
+          .then(
+            Helper.assertTextRendered([
+              'JUSTBEFORE',
+              'BOTHBEFORE',
+              'JUSTAFTER',
+              'BOTHAFTER',
+            ]),
+          )
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
     it('should render with external stylesheet', (done) => {
       Helper.bootstrap('sheet/node.html', 'sheet/style.css', 'sheet/image')
@@ -188,55 +206,75 @@ describe('html to image', () => {
         .catch(done)
     })
 
-    it('should render web fonts', (done) => {
-      Helper.bootstrap('fonts/node.html', 'fonts/style.css')
-        .then(util.delay(1000))
-        .then(Helper.assertTextRendered(['apper']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render web fonts',
+      (done) => {
+        Helper.bootstrap('fonts/node.html', 'fonts/style.css')
+          .then(util.delay(1000))
+          .then(Helper.assertTextRendered(['apper']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render images', (done) => {
-      Helper.bootstrap('images/node.html', 'images/style.css')
-        .then(util.delay(500))
-        .then(Helper.assertTextRendered(['PNG', 'JPG']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render images',
+      (done) => {
+        Helper.bootstrap('images/node.html', 'images/style.css')
+          .then(util.delay(500))
+          .then(Helper.assertTextRendered(['PNG', 'JPG']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render background images', (done) => {
-      Helper.bootstrap('css-bg/node.html', 'css-bg/style.css')
-        .then(Helper.assertTextRendered(['JPG']))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render background images',
+      (done) => {
+        Helper.bootstrap('css-bg/node.html', 'css-bg/style.css')
+          .then(Helper.assertTextRendered(['JPG']))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render user input from <input>', (done) => {
-      const text = 'USER INPUT'
-      Helper.bootstrap('input/node.html', 'input/style.css')
-        .then((container: HTMLDivElement) => {
-          const input = document.getElementById('input') as HTMLInputElement
-          input.value = text
-          return container
-        })
-        .then(Helper.assertTextRendered([text]))
-        .then(done)
-        .catch(done)
-    })
+    it(
+      'should render user input from <input>',
+      (done) => {
+        const text = 'USER INPUT'
+        Helper.bootstrap('input/node.html', 'input/style.css')
+          .then((container: HTMLDivElement) => {
+            const input = document.getElementById('input') as HTMLInputElement
+            input.value = text
+            return container
+          })
+          .then(Helper.assertTextRendered([text]))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
-    it('should render user input from <textarea>', (done) => {
-      const text = 'USER\nINPUT'
+    it(
+      'should render user input from <textarea>',
+      (done) => {
+        const text = 'USER\nINPUT'
 
-      Helper.bootstrap('textarea/node.html', 'textarea/style.css')
-        .then((container: HTMLDivElement) => {
-          const input = document.getElementById('input') as HTMLInputElement
-          input.value = text
-          return container
-        })
-        .then(Helper.assertTextRendered(text.split('\n')))
-        .then(done)
-        .catch(done)
-    })
+        Helper.bootstrap('textarea/node.html', 'textarea/style.css')
+          .then((container: HTMLDivElement) => {
+            const input = document.getElementById('input') as HTMLInputElement
+            input.value = text
+            return container
+          })
+          .then(Helper.assertTextRendered(text.split('\n')))
+          .then(done)
+          .catch(done)
+      },
+      OCR_TEST_TIMEOUT,
+    )
 
     it('should render content from <canvas>', (done) => {
       Helper.bootstrap('canvas/node.html', 'canvas/style.css', 'canvas/image')
