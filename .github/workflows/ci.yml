@@ -13,24 +13,31 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version:
+          - lts/*
+          - current
     steps:
       - name: ⤵️　Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3
+
       - name: 🎉　Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
+
       - name: 🚧　Install
-        run: npm install
+        run: npm ci
+
       - name: 📦　Build
         run: npm run build
+
       - name: ✅　Test
         run: npm test
+
       - name: 💡　Codecov
         uses: codecov/codecov-action@v2
+        if: matrix.node-version == 'lts/*'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./test/coverage/lcov.info
