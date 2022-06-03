@@ -11,7 +11,7 @@ module.exports = function (config) {
   config.set({
     files: [
       {
-        pattern: 'test/spec/resources/**/*',
+        pattern: 'test/spec/resources/**',
         included: false,
       },
       {
@@ -23,7 +23,7 @@ module.exports = function (config) {
         included: false,
       },
       {
-        pattern: 'node_modules/@fontsource/roboto/*.*',
+        pattern: 'node_modules/@fontsource/roboto/**',
         included: false,
       },
       'node_modules/imagediff/imagediff.js',
