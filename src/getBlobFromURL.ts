@@ -10,8 +10,12 @@ const cache: {
   [url: string]: Promise<Metadata>
 } = {}
 
-function getCacheKey(url: string) {
+function getCacheKey(url: string, includeQueryParams: boolean | undefined,) {
   let key = url.replace(/\?.*/, '')
+
+  if (includeQueryParams) {
+    key = url
+  }
 
   // font resourse
   if (/ttf|otf|eot|woff2?/i.test(key)) {
@@ -25,7 +29,7 @@ export function getBlobFromURL(
   url: string,
   options: Options,
 ): Promise<Metadata> {
-  const cacheKey = getCacheKey(url)
+  const cacheKey = getCacheKey(url, options.includeQueryParams)
 
   if (cache[cacheKey] != null) {
     return cache[cacheKey]
